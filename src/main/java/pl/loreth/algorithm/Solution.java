@@ -38,24 +38,36 @@ public class Solution {
         }
 
         //minimal max distance
+        //if there is more than one bollard at the same spot, it implies minimal max distance (amount of bollards at the same spot * X)
+        maxDistance = (getMaxDistanceImpliedByBollards(R) - 1) * X;
         if (leftLimit > 0) {
-            maxDistance = getMaxDistance(bollardDistance, 0, leftLimit);
-        } else {
-            maxDistance = 0;
+            int max = getMaxDistance(bollardDistance, 0, leftLimit - 1);
+            if (max > maxDistance) {
+                maxDistance = max;
+            }
         }
 
         //index of boat with max distance to the right
         int maxDistanceRightIndex = getMaxDistanceIndex(bollardDistance, leftLimit, R.length - 1);
         int maxDistanceRight = bollardDistance[maxDistanceRightIndex];
 
+        //if minimal max distance is bigger than current max distance on the right, it is the best distance that can be achieved
+        if (maxDistance >= maxDistanceRight) {
+            return maxDistance;
+        }
+
 
         //if boat on the left doesn't exceed minimal maxDist or causes maximal distance boat to increase, there's no point in moving it, so ignore it
         while (leftLimit < R.length) {
-            if (Math.abs(bollardDistance[leftLimit]) <= maxDistance && Math.abs(maxDistanceRight + 1) > Math.abs(maxDistanceRight)) {
+            if (Math.abs(bollardDistance[leftLimit]) <= maxDistance && Math.abs(maxDistanceRight - 1) < Math.abs(maxDistanceRight)) {
                 leftLimit++;
                 //else move all unexcluded boats to the right by one
             } else {
-                incrementDistances(bollardDistance, leftLimit, R.length - 1);
+                //if the last boat has reached right edge of wharf, break
+                if (R[R.length - 1] - bollardDistance[R.length - 1] + X == M) {
+                    break;
+                }
+                decrementDistances(bollardDistance, leftLimit, R.length - 1);
             }
         }
 
@@ -75,7 +87,7 @@ public class Solution {
 
     //max distance for a part of boats
     private int getMaxDistance(int distances[], int from, int to) {
-        int maxDistance = Math.abs(distances[0]);
+        int maxDistance = Math.abs(distances[from]);
         for (; from <= to; from++) {
             if (Math.abs(distances[from]) > maxDistance) {
                 maxDistance = distances[from];
@@ -85,7 +97,7 @@ public class Solution {
     }
 
     private int getMaxDistanceIndex(int distances[], int from, int to) {
-        int maxDistance = Math.abs(distances[0]);
+        int maxDistance = Math.abs(distances[from]);
         int index = from;
         for (; from <= to; from++) {
             if (Math.abs(distances[from]) > maxDistance) {
@@ -93,14 +105,33 @@ public class Solution {
                 index = from;
             }
         }
-        return maxDistance;
+        return index;
     }
 
-    //increment all distances of a section by one
-    private void incrementDistances(int distances[], int from, int to) {
+    //decrement all distances of a section by one
+    private void decrementDistances(int distances[], int from, int to) {
         for (; from <= to; from++) {
-            distances[from]++;
+            distances[from]--;
         }
     }
+
+    //helper method for finding the biggest amount of bollards at the same spot
+    private int getMaxDistanceImpliedByBollards(int R[]) {
+        int max = 0;
+        int counter = 0;
+        int previous = R[0];
+        for (int bollard : R) {
+            if (bollard == previous) {
+                counter++;
+            } else if (max < counter) {
+                max = counter;
+            }
+            counter = 1;
+            previous = bollard;
+        }
+
+        return max;
+    }
+
 
 }
