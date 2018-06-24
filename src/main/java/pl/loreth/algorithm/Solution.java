@@ -40,16 +40,18 @@ public class Solution {
         }
 
         //minimal max distance
-        maxDistance = getMaxDistance(bollardDistance, 0, leftLimit - 1);
+        maxDistance = getMaxDistance(bollardDistance, 0, leftLimit);
         //index of boat with max distance to the right
         int maxDistanceRightIndex = getMaxDistanceIndex(bollardDistance, leftLimit, bollardDistance.length - 1);
         int maxDistanceRight = bollardDistance[maxDistanceRightIndex];
 
         //while
-        if (bollardDistance[leftLimit] != 0 && Math.abs(maxDistanceRight + 1) > Math.abs(maxDistanceRight)) {
-
+        //if boat on the left doesn't exceed minimal maxDist or causes maximal distance boat to increase, there's no point in moving it, so ignore it
+        if (Math.abs(bollardDistance[leftLimit]) <= maxDistance && Math.abs(maxDistanceRight + 1) > Math.abs(maxDistanceRight)) {
+            leftLimit++;
+            //else move all unexcluded boats to the right by one
         } else {
-
+            incrementDistances(bollardDistance, leftLimit, bollardDistance.length - 1);
         }
 
         //TODO: reduce the distances
@@ -69,7 +71,7 @@ public class Solution {
     //max distance for a part of boats
     private int getMaxDistance(int distances[], int from, int to) {
         int maxDistance = Math.abs(distances[0]);
-        for (; from < to; from++) {
+        for (; from <= to; from++) {
             if (Math.abs(distances[from]) > maxDistance) maxDistance = distances[from];
         }
         return maxDistance;
@@ -78,13 +80,20 @@ public class Solution {
     private int getMaxDistanceIndex(int distances[], int from, int to) {
         int maxDistance = Math.abs(distances[0]);
         int index = from;
-        for (; from < to; from++) {
+        for (; from <= to; from++) {
             if (Math.abs(distances[from]) > maxDistance) {
                 maxDistance = distances[from];
                 index = from;
             }
         }
         return maxDistance;
+    }
+
+    //increment all distances of a section by one
+    private void incrementDistances(int distances[], int from, int to) {
+        for (; from <= to; from++) {
+            distances[from]++;
+        }
     }
 
 }
