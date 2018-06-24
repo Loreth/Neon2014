@@ -31,6 +31,17 @@ public class Solution {
             bollardDistance[i] = R[i] - boatPosition[i];
         }
 
+
+        //if there are boats to the right of bollards in the beginning, they can be ignored, as their distance can't be improved (implicated by N bollards and N boats)
+        // - they also set the "minimal"  max distance
+        int leftLimit = 0;
+        while (leftLimit < R.length && bollardDistance[leftLimit] <= 0) {
+            leftLimit++;
+        }
+        int minimalMaxDistance = getMaxDistance(bollardDistance, leftLimit, bollardDistance.length - 1);
+
+
+
         //TODO: reduce the distances
 
 
@@ -41,6 +52,27 @@ public class Solution {
         int maxDistance = Math.abs(distances[0]);
         for (int dist : distances) {
             if (Math.abs(dist) > maxDistance) maxDistance = dist;
+        }
+        return maxDistance;
+    }
+
+    //max distance for a part of boats
+    private int getMaxDistance(int distances[], int from, int to) {
+        int maxDistance = Math.abs(distances[0]);
+        for (; from < to; from++) {
+            if (Math.abs(distances[from]) > maxDistance) maxDistance = distances[from];
+        }
+        return maxDistance;
+    }
+
+    private int getMaxDistanceIndex(int distances[], int from, int to) {
+        int maxDistance = Math.abs(distances[0]);
+        int index = from;
+        for (; from < to; from++) {
+            if (Math.abs(distances[from]) > maxDistance)  {
+                maxDistance = distances[from];
+                index = from;
+            }
         }
         return maxDistance;
     }
