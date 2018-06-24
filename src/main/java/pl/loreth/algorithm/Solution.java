@@ -71,8 +71,6 @@ public class Solution {
             }
         }
 
-        //TODO: reduce the distances
-
 
         return maxDistance = getMaxDistance(bollardDistance);
     }
@@ -125,8 +123,8 @@ public class Solution {
                 counter++;
             } else if (max < counter) {
                 max = counter;
+                counter = 1;
             }
-            counter = 1;
             previous = bollard;
         }
 
