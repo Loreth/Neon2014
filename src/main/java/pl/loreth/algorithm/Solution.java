@@ -38,9 +38,19 @@ public class Solution {
         while (leftLimit < R.length && bollardDistance[leftLimit] <= 0) {
             leftLimit++;
         }
-        int minimalMaxDistance = getMaxDistance(bollardDistance, leftLimit, bollardDistance.length - 1);
 
+        //minimal max distance
+        maxDistance = getMaxDistance(bollardDistance, 0, leftLimit - 1);
+        //index of boat with max distance to the right
+        int maxDistanceRightIndex = getMaxDistanceIndex(bollardDistance, leftLimit, bollardDistance.length - 1);
+        int maxDistanceRight = bollardDistance[maxDistanceRightIndex];
 
+        //while
+        if (bollardDistance[leftLimit] != 0 && Math.abs(maxDistanceRight + 1) > Math.abs(maxDistanceRight)) {
+
+        } else {
+
+        }
 
         //TODO: reduce the distances
 
@@ -69,7 +79,7 @@ public class Solution {
         int maxDistance = Math.abs(distances[0]);
         int index = from;
         for (; from < to; from++) {
-            if (Math.abs(distances[from]) > maxDistance)  {
+            if (Math.abs(distances[from]) > maxDistance) {
                 maxDistance = distances[from];
                 index = from;
             }
