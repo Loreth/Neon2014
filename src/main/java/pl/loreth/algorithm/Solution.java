@@ -1,12 +1,10 @@
 package main.java.pl.loreth.algorithm;
 
 
-import java.util.Collections;
-
 public class Solution {
     public int solution(int[] R, int X, int M) {
         //largest distance between the middle of any boat's bow and the bollard to which the boat is moored
-        int maxDistance = 0;
+        int maxDistance;
         int boatWidth = 2 * X;
 
         //If it is not possible to tie all the boats, the function should return −1
@@ -40,24 +38,31 @@ public class Solution {
         }
 
         //minimal max distance
-        maxDistance = getMaxDistance(bollardDistance, 0, leftLimit);
+        if (leftLimit > 0) {
+            maxDistance = getMaxDistance(bollardDistance, 0, leftLimit);
+        } else {
+            maxDistance = 0;
+        }
+
         //index of boat with max distance to the right
-        int maxDistanceRightIndex = getMaxDistanceIndex(bollardDistance, leftLimit, bollardDistance.length - 1);
+        int maxDistanceRightIndex = getMaxDistanceIndex(bollardDistance, leftLimit, R.length - 1);
         int maxDistanceRight = bollardDistance[maxDistanceRightIndex];
 
-        //while
+
         //if boat on the left doesn't exceed minimal maxDist or causes maximal distance boat to increase, there's no point in moving it, so ignore it
-        if (Math.abs(bollardDistance[leftLimit]) <= maxDistance && Math.abs(maxDistanceRight + 1) > Math.abs(maxDistanceRight)) {
-            leftLimit++;
-            //else move all unexcluded boats to the right by one
-        } else {
-            incrementDistances(bollardDistance, leftLimit, bollardDistance.length - 1);
+        while (leftLimit < R.length) {
+            if (Math.abs(bollardDistance[leftLimit]) <= maxDistance && Math.abs(maxDistanceRight + 1) > Math.abs(maxDistanceRight)) {
+                leftLimit++;
+                //else move all unexcluded boats to the right by one
+            } else {
+                incrementDistances(bollardDistance, leftLimit, R.length - 1);
+            }
         }
 
         //TODO: reduce the distances
 
 
-        return maxDistance;
+        return maxDistance = getMaxDistance(bollardDistance);
     }
 
     private int getMaxDistance(int distances[]) {
@@ -72,7 +77,9 @@ public class Solution {
     private int getMaxDistance(int distances[], int from, int to) {
         int maxDistance = Math.abs(distances[0]);
         for (; from <= to; from++) {
-            if (Math.abs(distances[from]) > maxDistance) maxDistance = distances[from];
+            if (Math.abs(distances[from]) > maxDistance) {
+                maxDistance = distances[from];
+            }
         }
         return maxDistance;
     }
