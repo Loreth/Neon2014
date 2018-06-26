@@ -1,7 +1,6 @@
 package main.java.pl.loreth.runner;
 
 import main.java.pl.loreth.algorithm.Solution;
-import main.java.pl.loreth.algorithm.Solution2;
 
 public class Runner {
     public static void main(String[] args) {

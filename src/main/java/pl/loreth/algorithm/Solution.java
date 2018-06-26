@@ -3,8 +3,6 @@ package main.java.pl.loreth.algorithm;
 
 public class Solution {
     public int solution(int[] R, int X, int M) {
-        //largest distance between the middle of any boat's bow and the bollard to which the boat is moored
-        int maxDistance;
         int boatWidth = 2 * X;
 
         //If it is not possible to tie all the boats, the algorithm should return
@@ -21,7 +19,7 @@ public class Solution {
             boatPositions[i] = boatPositions[i - 1] + boatWidth;
         }
 
-        //initial setup of distance of mooring bollard to a corresponding boat's bow
+        //initial setup of distance of a mooring bollard to a corresponding boat's bow
         //distance is negative if the boat is further to the right than the bollard
         int bollardDistances[] = new int[R.length];
 
@@ -29,18 +27,12 @@ public class Solution {
             bollardDistances[i] = R[i] - boatPositions[i];
         }
 
-        //TODO: "minimal" (it's at least that big) max distance is set by the boat with the lowest negative distance or 0 if there is none, calculate movement accordingly
-
-        //if there are boats to the right of bollards in the beginning, they can be ignored, as their distance can't be improved (implicated by N bollards and N boats)
-        int leftLimit = 0;
-        while (leftLimit < R.length && bollardDistances[leftLimit] <= 0) {
-            leftLimit++;
-        }
 
         //boats with the minimal distance (non-absolute) in a certain part [0,x] control, how much movement can be made to the right
         //the goal is not to move the boats to the right in a way, that would cause a corresponding limiting boat's absolute distance to increase further than needed
-        //the whole point is not to go below balance point between boat that's being iterated over and a corresponding limiting boat
-        //balance point is 0 (equal distances)
+        //which effectively means - not to go below balance point between boat that's being iterated over and a corresponding limiting boat
+        //(cause there is no space on the left, but there is on the right)
+        //balance point (movement) is 0 (equal distances)
         //distance of boats in between doesn't matter, as they're limited by the same boat on the right, so their distance can only improve or become at worst equal to the currently moving boat
         int limitingDistances[] = getLimitingDistancesArray(bollardDistances);
 
@@ -57,14 +49,14 @@ public class Solution {
                 //if possible movement exceeds maximal possible position, move to maxBoatPosition
                 if (boatPositions[R.length - 1] + movement + possibleMovement >= maxBoatPosition) {
                     movement = maxBoatPosition - boatPositions[R.length - 1];
-//                    for (; i < R.length; i++) {
-//                        bollardDistances[i] -= movement;
-//                    }
+                    for (; i < R.length; i++) {
+                        bollardDistances[i] -= movement;
+                    }
+                    break;
                 } else {
                     movement += possibleMovement;
                 }
             }
-
             bollardDistances[i] -= movement;
         }
 
