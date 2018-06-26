@@ -29,7 +29,7 @@ public class Solution {
             bollardDistances[i] = R[i] - boatPositions[i];
         }
 
-        //TODO: "minimal"  max distance is set by the boat with the lowest negative distance or 0 if there is none, calculate movement accordingly
+        //TODO: "minimal" (it's at least that big) max distance is set by the boat with the lowest negative distance or 0 if there is none, calculate movement accordingly
 
         //if there are boats to the right of bollards in the beginning, they can be ignored, as their distance can't be improved (implicated by N bollards and N boats)
         int leftLimit = 0;
@@ -37,26 +37,36 @@ public class Solution {
             leftLimit++;
         }
 
+        //boats with the minimal distance (non-absolute) in a certain part [0,x] control, how much movement can be made to the right
+        //the goal is not to move the boats to the right in a way, that would cause a corresponding limiting boat's absolute distance to increase further than needed
+        //the whole point is not to go below balance point between boat that's being iterated over and a corresponding limiting boat
+        //balance point is 0 (equal distances)
+        //distance of boats in between doesn't matter, as they're limited by the same boat on the right, so their distance can only improve or become at worst equal to the currently moving boat
         int limitingDistances[] = getLimitingDistancesArray(bollardDistances);
 
-        //if boat on the left doesn't exceed minimal maxDist or causes maximal distance boat to increase, there's no point in moving it, so ignore it
-//        while (leftLimit < R.length) {
-//            if (Math.abs(bollardDistances[leftLimit]) <= maxDistance) {
-//                leftLimit++;
-//                //else move all unexcluded boats to the right by one
-//            } else if (Math.abs(bollardDistances[maxDistanceRightIndex] - 1) > Math.abs(bollardDistances[maxDistanceRightIndex])) {
-//                leftLimit = maxDistanceRightIndex + 1;
-//                if (leftLimit < R.length) break;
-//                maxDistanceRightIndex = getMaxDistanceIndex(bollardDistances, leftLimit, R.length - 1);
-//            } else {
-//                //if the last boat has reached right edge of wharf, break
-//                if (R[R.length - 1] - bollardDistances[R.length - 1] + X == M) {
-//                    break;
-//                }
-//                decrementDistances(bollardDistances, leftLimit, R.length - 1);
-//            }
-//        }
+        //movement of boats to the right so far, instead of updating all distances, held in a variable in order to keep good performance
+        int movement = 0;
+        //last possible position for middle of the last boat
+        int maxBoatPosition = M - X;
 
+        //moving boats
+        for (int i = 0; i < R.length; i++) {
+            //possible movement achieved by calculating balance point (hence division by 2)
+            int possibleMovement = (bollardDistances[i] + limitingDistances[i]) / 2 - movement;
+            if (possibleMovement > 0) {
+                //if possible movement exceeds maximal possible position, move to maxBoatPosition
+                if (boatPositions[R.length - 1] + movement + possibleMovement >= maxBoatPosition) {
+                    movement = maxBoatPosition - boatPositions[R.length - 1];
+//                    for (; i < R.length; i++) {
+//                        bollardDistances[i] -= movement;
+//                    }
+                } else {
+                    movement += possibleMovement;
+                }
+            }
+
+            bollardDistances[i] -= movement;
+        }
 
         return getMaxDistance(bollardDistances);
     }
@@ -66,17 +76,6 @@ public class Solution {
         for (int dist : distances) {
             if (Math.abs(dist) > maxDistance) {
                 maxDistance = Math.abs(dist);
-            }
-        }
-        return maxDistance;
-    }
-
-    //max distance for a part of boats
-    private int getMaxDistance(int distances[], int from, int to) {
-        int maxDistance = Math.abs(distances[from]);
-        for (; from <= to; from++) {
-            if (Math.abs(distances[from]) > maxDistance) {
-                maxDistance = Math.abs(distances[from]);
             }
         }
         return maxDistance;
@@ -95,5 +94,4 @@ public class Solution {
 
         return limitingDistances;
     }
-
 }
