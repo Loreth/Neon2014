@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5ec68ec-c3c9-4f89-9914-3e38d67d7157" name="Default" comment="aaa">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/loreth/algorithm/Solution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/loreth/algorithm/Solution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/loreth/runner/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/loreth/runner/Runner.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,8 +17,8 @@
       <file leaf-file-name="Solution.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/pl/loreth/algorithm/Solution.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="31" column="114" selection-start-line="31" selection-start-column="114" selection-end-line="31" selection-end-column="114" />
+            <state relative-caret-position="454">
+              <caret line="39" column="58" lean-forward="true" selection-start-line="39" selection-start-column="58" selection-end-line="39" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -223,15 +221,15 @@
       <workItem from="1529604685989" duration="1945000" />
       <workItem from="1529760817632" duration="5694000" />
       <workItem from="1529841835183" duration="29587000" />
-      <workItem from="1530004538147" duration="1159000" />
+      <workItem from="1530004538147" duration="3374000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40947000" />
+    <option name="totallyTimeSpent" value="43162000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
@@ -247,7 +245,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -312,14 +310,6 @@
           <line>13</line>
           <properties />
           <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/pl/loreth/algorithm/Solution.java</url>
-          <line>146</line>
-          <properties class="main.java.pl.loreth.algorithm.Solution" method="getMaxBollardsInOnePlace">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="12" />
@@ -390,8 +380,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/loreth/algorithm/Solution.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="31" column="114" selection-start-line="31" selection-start-column="114" selection-end-line="31" selection-end-column="114" />
+        <state relative-caret-position="454">
+          <caret line="39" column="58" lean-forward="true" selection-start-line="39" selection-start-column="58" selection-end-line="39" selection-end-column="58" />
         </state>
       </provider>
     </entry>
