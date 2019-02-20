@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f5ec68ec-c3c9-4f89-9914-3e38d67d7157" name="Default" comment="aaa">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/loreth/algorithm/Solution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/loreth/algorithm/Solution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/loreth/runner/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/loreth/runner/Runner.java" afterDir="false" />
-    </list>
+    <list default="true" id="f5ec68ec-c3c9-4f89-9914-3e38d67d7157" name="Default" comment="aaa" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -211,12 +207,12 @@
       <workItem from="1529604685989" duration="1945000" />
       <workItem from="1529760817632" duration="5694000" />
       <workItem from="1529841835183" duration="29587000" />
-      <workItem from="1530004538147" duration="16801000" />
+      <workItem from="1530004538147" duration="17395000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56589000" />
+    <option name="totallyTimeSpent" value="57183000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
